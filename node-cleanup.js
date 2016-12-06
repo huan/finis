@@ -12,6 +12,7 @@
  */
  
 var installed = false;
+var globalReason = '';
 
 module.exports = function nodeCleanup(cleanupHandler, messages) {
 
@@ -36,14 +37,16 @@ function install(messages) {
         messages.uncaughtException = 'Uncaught exception...';
 
     // do app-specific cleaning before exiting
-    process.on('exit', function () {
-        process.emit('cleanup');
+    process.on('exit', function (code) {
+        process.emit('cleanup', globalReason || 'exit', code);
     });
 
     // catch ctrl+c event and exit normally
     process.on('SIGINT', function () {
-        if (messages.ctrl_C !== '')
+        if (messages.ctrl_C !== '') {
             process.stderr.write(messages.ctrl_C + "\n");
+            globalReason = messages.ctrl_C
+        }
         process.exit(2);
     });
 
@@ -52,6 +55,7 @@ function install(messages) {
         if (messages.uncaughtException !== '') {
             process.stderr.write(messages.uncaughtException + "\n");
             process.stderr.write(e.stack + "\n");
+            globalReason = messages.uncaughtException
         }
         process.exit(99);
     });
