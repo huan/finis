@@ -45,8 +45,8 @@ function install(messages) {
     process.on('SIGINT', function () {
         if (messages.ctrl_C !== '') {
             process.stderr.write(messages.ctrl_C + "\n");
-            globalReason = messages.ctrl_C
         }
+        globalReason = 'SIGINT'
         process.exit(2);
     });
 
@@ -55,7 +55,7 @@ function install(messages) {
         if (messages.uncaughtException !== '') {
             process.stderr.write(messages.uncaughtException + "\n");
             process.stderr.write(e.stack + "\n");
-            globalReason = messages.uncaughtException
+            globalReason = 'uncaughtException'
         }
         process.exit(99);
     });
