@@ -38,7 +38,7 @@ function install(messages) {
 
     // do app-specific cleaning before exiting
     process.on('exit', function (code) {
-        process.emit('cleanup', exitSignalName || 'exit', code);
+        process.emit('cleanup', code, exitSignalName || 'exit');
     });
 
     // catch ctrl+c event and exit normally
