@@ -12,7 +12,7 @@
  */
  
 var installed = false;
-var globalReason = '';
+var exitSignalName = '';
 
 module.exports = function nodeCleanup(cleanupHandler, messages) {
 
@@ -38,7 +38,7 @@ function install(messages) {
 
     // do app-specific cleaning before exiting
     process.on('exit', function (code) {
-        process.emit('cleanup', globalReason || 'exit', code);
+        process.emit('cleanup', exitSignalName || 'exit', code);
     });
 
     // catch ctrl+c event and exit normally
@@ -46,7 +46,7 @@ function install(messages) {
         if (messages.ctrl_C !== '') {
             process.stderr.write(messages.ctrl_C + "\n");
         }
-        globalReason = 'SIGINT'
+        exitSignalName = 'SIGINT'
         process.exit(2);
     });
 
@@ -55,8 +55,8 @@ function install(messages) {
         if (messages.uncaughtException !== '') {
             process.stderr.write(messages.uncaughtException + "\n");
             process.stderr.write(e.stack + "\n");
-            globalReason = 'uncaughtException'
         }
+        exitSignalName = 'uncaughtException'
         process.exit(99);
     });
 }
