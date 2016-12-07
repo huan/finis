@@ -47,7 +47,7 @@ function install(messages) {
             process.stderr.write(messages.ctrl_C + "\n");
         }
         exitSignalName = 'SIGINT'
-        process.exit(2);
+        process.exit(130);
     });
 
     //catch uncaught exceptions, trace, then exit normally
