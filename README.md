@@ -10,15 +10,21 @@ npm install finis --save
 
 ## Usage
 
-finis() installs a function that performs cleanup activities just before the node process exits. The callback function runs when the process exits normally, when the user presses *ctrl-C*, and when an exception is uncaught.
+finis() installs a callback function which will be run just before the node process exits.
 
-You may call finis() multiple times to install multiple cleanup handlers.
+The callback function will be called when:
+
+1. the process exits normally
+1. the user presses _Ctrl+C_
+1. an exception is uncaught
+
+You may call finis() multiple times to install multiple callback functions.
 
 ```js
 var finis = require('finis')
 
-finis((code, signal) => {
-  console.log(`finis(${code}, ${signal})`)
+finis((code, signal, error) => {
+  console.log(`finis(${code}, ${signal}, ${error})`)
 })
 ```
 
