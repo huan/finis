@@ -1,14 +1,14 @@
 {
-  "name": "node-cleanup",
-  "version": "1.0.1",
-  "description": "installs a cleanup handler that always runs on exiting node",
-  "main": "node-cleanup.js",
+  "name": "finis",
+  "version": "0.0.1",
+  "description": "run your callback before node exit and set `exit code` and `signal name` as parameters",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jtlapp/node-cleanup.git"
+    "url": "git+https://github.com/zixia/finis.git"
   },
   "keywords": [
     "node",
@@ -17,7 +17,7 @@
     "sigint",
     "ctrl-c"
   ],
-  "author": "",
+  "author": "Huan LI <zixia@zixia.net>",
   "contributors": [
     {
       "name": "CanyonCasa",
@@ -30,7 +30,7 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/jtlapp/node-cleanup/issues"
+    "url": "https://github.com/zixia/finis/issues"
   },
-  "homepage": "https://github.com/jtlapp/node-cleanup#readme"
+  "homepage": "https://github.com/zixia/finis#readme"
 }
