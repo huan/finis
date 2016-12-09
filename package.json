@@ -1,6 +1,6 @@
 {
   "name": "finis",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "hook node exit with your callback, get `exit code` and `signal name` from parameters",
   "main": "index.js",
   "scripts": {
