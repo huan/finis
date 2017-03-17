@@ -1,7 +1,7 @@
 {
   "name": "finis",
   "version": "0.0.2",
-  "description": "hook node exit with your callback, get `exit code` and `signal name` from parameters",
+  "description": "Node.js program finisher - run your last callback with `exit code` and `signal name` as arguments",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
