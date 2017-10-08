@@ -1,6 +1,6 @@
 {
   "name": "finis",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Node.js program finisher - run your last callback with `exit code` and `signal name` as arguments",
   "main": "index.js",
   "scripts": {
