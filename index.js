@@ -45,5 +45,5 @@ function install() {
   })
 }
 
-module.exports = module.default = module.finis = finis
+module.exports = finis.default = finis.finis = finis
 
