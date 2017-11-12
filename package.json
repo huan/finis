@@ -32,5 +32,8 @@
   "bugs": {
     "url": "https://github.com/zixia/finis/issues"
   },
-  "homepage": "https://github.com/zixia/finis#readme"
+  "homepage": "https://github.com/zixia/finis#readme",
+  "devDependencies": {
+    "@types/node": "^8.0.51"
+  }
 }
