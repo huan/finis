@@ -7,9 +7,6 @@
 
 var installed = false
 
-var signal
-var error
-
 function finis(callback) {
 
   // attach user callback to the process event emitter.
@@ -25,24 +22,14 @@ function finis(callback) {
 }
 
 function install() {
-
   // do app-specific cleaning before exiting
-  process.on('exit', code => {
-    process.emit('finis', code, signal || 'exit', error)
-  })
-
+  process.on('exit',              code  => process.emit('finis', code, 'exit'))
+    
   // catch ctrl+c event and exit normally
-  process.on('SIGINT', () => {
-    signal = 'SIGINT'
-    process.exit(130)
-  })
+  process.on('SIGINT',            ()    => process.emit('finis', 130, 'SIGINT'))
 
   //catch uncaught exceptions, trace, then exit normally
-  process.on('uncaughtException', err => {
-    signal  = 'uncaughtException'
-    error   = err
-    process.exit(99)
-  })
+  process.on('uncaughtException', err   => process.emit('finis', 99, 'uncaughtException', err))
 }
 
 module.exports = finis.default = finis.finis = finis
