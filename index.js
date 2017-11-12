@@ -11,8 +11,9 @@ function finis(callback) {
 
   // attach user callback to the process event emitter.
   // if no callback, it will still exit gracefully on Ctrl-C
-  callback = callback || function() {} // for just the benefit of graceful SIGINTs
-  process.on('finis', callback)
+  if (callback) {
+    process.on('finis', callback)
+  }
 
   // only install the termination handlers once
   if (!installed) {
@@ -24,12 +25,22 @@ function finis(callback) {
 function install() {
   // do app-specific cleaning before exiting
   process.on('exit',              code  => process.emit('finis', code, 'exit'))
-    
-  // catch ctrl+c event and exit normally
-  process.on('SIGINT',            ()    => process.emit('finis', 130, 'SIGINT'))
+
+  /**
+   * catch `ctrl+c` & `kill -s TERM` event
+   * 
+   * https://en.wikipedia.org/wiki/Signal_(IPC)
+   * SIGINT	2	Terminate	Terminal interrupt signal.
+   * SIGTERM	15	Terminate	Termination signal.
+   * 
+   * https://nodejs.org/api/process.html#process_signal_events
+   * SIGTERM and SIGINT have default handlers on non-Windows platforms that resets the terminal mode before exiting with code 128 + signal number. If one of these signals has a listener installed, its default behavior will be removed (Node.js will no longer exit).
+   */
+  process.on('SIGINT',            ()  => process.emit('finis', 130, 'SIGINT'))  
+  process.on('SIGTERM',           ()  => process.emit('finis', 143, 'SIGTERM'))
 
   //catch uncaught exceptions, trace, then exit normally
-  process.on('uncaughtException', err   => process.emit('finis', 99, 'uncaughtException', err))
+  process.on('uncaughtException', err => process.emit('finis', 99, 'uncaughtException', err))
 }
 
 module.exports = finis.default = finis.finis = finis

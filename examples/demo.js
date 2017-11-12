@@ -1,10 +1,7 @@
 const finis = require('../')
 
-finis((code, signal) => {
-    console.log('CB:', code, signal)
-    if (signal === 'SIGINT') {
-        process.exit()
-    }
+finis((code, signal, err) => {
+    console.log('CB:', code, signal, err)
 })
 
-setTimeout(() => console.log('ok'), 3000)
+setTimeout(() => console.log('ok'), 5000)
