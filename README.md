@@ -6,7 +6,7 @@ Run your callback before node exit, pass `exit code` and `signal name` as argume
 
 ## INSTALLATION
 
-```
+```shell
 npm install finis --save
 ```
 
@@ -47,6 +47,7 @@ You may call finis() multiple times to install multiple callback functions.
 ## CHANGELOG
 
 ### v0.4 Nov 2017
+
 1. Do not call `process.exit` by default
 1. Add support to `SIGTERM`
 1. Add support to TypeScript
