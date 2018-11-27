@@ -1,7 +1,7 @@
 /**
  * finis - hook node exit with your callback, get `exit code` and `signal name` from parameters
  *
- * https://github.com/zixia/finis
+ * https://github.com/huan/finis
  *
  */
 

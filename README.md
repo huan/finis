@@ -1,6 +1,6 @@
 # FINIS
 
-![Finis](https://zixia.github.io/finis/images/finish.png)
+![Finis](https://huan.github.io/finis/images/finish.png)
 
 Run your callback before node exit, pass `exit code` and `signal name` as arguments
 
