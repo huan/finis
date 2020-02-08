@@ -9,7 +9,10 @@ var installed = false
 
 function install () {
   // do app-specific cleaning before exiting
-  process.on('exit',              code  => process.emit('finis', code, 'exit'))
+  process.on('exit', code  => {
+    console.error(`finis: exit code: ${code}`)
+    process.emit('finis', code, 'exit')
+  })
 
   /**
    * catch `ctrl+c` & `kill -s TERM` event
@@ -21,11 +24,24 @@ function install () {
    * https://nodejs.org/api/process.html#process_signal_events
    * SIGTERM and SIGINT have default handlers on non-Windows platforms that resets the terminal mode before exiting with code 128 + signal number. If one of these signals has a listener installed, its default behavior will be removed (Node.js will no longer exit).
    */
-  process.on('SIGINT',            ()  => process.emit('finis', 130, 'SIGINT'))
-  process.on('SIGTERM',           ()  => process.emit('finis', 143, 'SIGTERM'))
+  process.on('SIGINT', () => {
+    console.error('finis: SIGNIT received.')
+    process.emit('finis', 130, 'SIGINT')
+  })
+  process.on('SIGTERM', () => {
+    console.error('finis: SIGTERM received.')
+    process.emit('finis', 143, 'SIGTERM')
+  })
 
   //catch uncaught exceptions, trace, then exit normally
-  process.on('uncaughtException', err => process.emit('finis', 99, 'uncaughtException', err))
+  process.on('uncaughtException', (err, origin) => {
+    console.error(
+      'finis',
+      `Caught exception:`, err,
+      `Exception origin:`, origin,
+    )
+    process.emit('finis', 99, 'uncaughtException', err)
+  })
 }
 
 function finis (callback) {
